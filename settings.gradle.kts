@@ -21,7 +21,6 @@
 rootProject.name = "PartnerAdministrationReferenceApplication"
 
 include(
-    "integration",
     "referenceApp",
     "webex-admin-api",
     "webex-calling-api",
