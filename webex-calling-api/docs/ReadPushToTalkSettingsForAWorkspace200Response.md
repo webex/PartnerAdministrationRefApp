@@ -1,0 +1,73 @@
+<!--  Copyright 2025 Cisco Systems Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.-->
+# Copyright 2025 Cisco Systems Inc.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
+
+
+# ReadPushToTalkSettingsForAWorkspace200Response
+
+
+## Properties
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+|**allowAutoAnswer** | **Boolean** | Set to &#x60;true&#x60; to enable the Push-to-Talk feature.  When enabled, a workspace receives a Push-to-Talk call and answers the call automatically. |  |
+|**connectionType** | [**ConnectionTypeEnum**](#ConnectionTypeEnum) | Specifies the connection type to be used. |  |
+|**accessType** | [**AccessTypeEnum**](#AccessTypeEnum) | Specifies the access type to be applied when evaluating the member list. |  |
+|**members** | [**List&lt;GetAPersonSPrivacySettings200ResponseMonitoringAgentsInner&gt;**](GetAPersonSPrivacySettings200ResponseMonitoringAgentsInner.md) | List of people/workspaces that are allowed or disallowed to interact using the Push-to-Talk feature. |  [optional] |
+
+
+
+## Enum: ConnectionTypeEnum
+
+| Name | Value |
+|---- | -----|
+| ONE_WAY | &quot;ONE_WAY&quot; |
+| TWO_WAY | &quot;TWO_WAY&quot; |
+
+
+
+## Enum: AccessTypeEnum
+
+| Name | Value |
+|---- | -----|
+| ALLOW_MEMBERS | &quot;ALLOW_MEMBERS&quot; |
+| BLOCK_MEMBERS | &quot;BLOCK_MEMBERS&quot; |
+
+
+

@@ -1,0 +1,454 @@
+# Copyright 2025 Cisco Systems Inc.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
+openapi: 3.0.3
+info:
+  description: Webex Admin API specifications
+  title: All Webex Admin API
+  version: 1.0.0
+servers:
+- url: https://webexapis.com/
+paths:
+  /identity/v1/organizations/{orgId}:
+    get:
+      description: |-
+        <br/>
+
+        **Authorization**
+
+        OAuth token rendered by identity broker.
+
+        <br/>
+
+        One of the following OAuth scopes is required:
+
+        - `identity:organizations_rw`
+
+        - `identity:organizations_read`
+
+        <br/>
+      operationId: Get an organization
+      parameters:
+      - description: Webex Identity assigned organization identifier.
+        example: 82adacf4-453f-4e2b-a406-2939fddcaad2
+        explode: false
+        in: path
+        name: orgId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+        example: Bearer YOUR_AUTHORIZATION_TOKEN
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                schemas:
+                - urn:cisco:codev:identity:organization:core:1.0
+                id: 82adacf4-453f-4e2b-a406-2939fddcaad2
+                displayName: "Acme, Inc."
+                meta:
+                  created: 2021-05-13T15:51:09.736Z
+                  lastModified: 2024-05-16T12:25:16.739Z
+                  version: W/"67863103533"
+              schema:
+                $ref: '#/components/schemas/Get_an_organization_200_response'
+          description: OK
+      summary: Get an organization
+      tags: []
+      x-accepts:
+      - application/json
+    patch:
+      description: |-
+        <br/>
+
+        **Authorization**
+
+        OAuth token rendered by identity broker.
+
+        <br/>
+
+        One of the following OAuth scopes is required:
+
+        - `identity:organizations_rw`
+
+        <br/>
+
+        The following administrators can use this API:
+
+        - `id_full_admin`
+
+        <br/>
+
+        **Usage**:
+
+        1. Input JSON must contain schema: "urn:cisco:codev:identity:organization:core:1.0".
+      operationId: Update an organization
+      parameters:
+      - description: Webex Identity assigned organization identifier.
+        example: 82adacf4-453f-4e2b-a406-2939fddcaad2
+        explode: false
+        in: path
+        name: orgId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+        example: Bearer YOUR_AUTHORIZATION_TOKEN
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              schemas:
+              - urn:cisco:codev:identity:organization:core:1.0
+              displayName: "Acme_New, Inc."
+            schema:
+              $ref: '#/components/schemas/Update_an_organization_request'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                schemas:
+                - urn:cisco:codev:identity:organization:core:1.0
+                id: 82adacf4-453f-4e2b-a406-2939fddcaad2
+                displayName: "Acme_New, Inc."
+                meta:
+                  created: 2021-05-13T15:51:09.736Z
+                  lastModified: 2024-05-20T12:25:16.739Z
+                  version: W/"67863100894"
+              schema:
+                $ref: '#/components/schemas/Get_an_organization_200_response'
+          description: OK
+      summary: Update an organization
+      tags: []
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /organizations:
+    get:
+      description: "List all organizations visible by your account. The results will\
+        \ not be [paginated](/docs/basics#pagination)."
+      operationId: List Organizations
+      parameters:
+      - description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+        example: Bearer YOUR_AUTHORIZATION_TOKEN
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                items:
+                - id: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                  displayName: "Acme, Inc."
+                  created: 2015-10-18T14:26:16+00:00
+              schema:
+                $ref: '#/components/schemas/List_Organizations_200_response'
+          description: OK
+      summary: List Organizations
+      tags: []
+      x-accepts:
+      - application/json
+  /organizations/{orgId}:
+    delete:
+      description: |-
+        Deletes an organization, by ID. It may take up to 10 minutes for the organization to be deleted after the response is returned.
+        <br/><br/>
+        Specify the org ID in the `orgId` parameter in the URI.
+
+        <div><Callout type="warning">Deleting your organization permanently deletes all of the information associated with your organization and is irreversible.</Callout></div>
+
+        Deleting an Organization may fail with a HTTP 409 Conflict response and encounter one or more of the errors described below. Resolve these conditions to allow the delete to succeed.
+        <br/><br/>
+
+        + Org cannot be deleted as it has Linked sites.
+
+        + Org cannot be deleted as it has active subscriptions or licenses.
+
+        + Org cannot be deleted as [Directory Synchronization](https://developer.webex.com/docs/api/v1/broadworks-enterprises/get-directory-sync-status-for-an-enterprise) is enabled.
+
+        + Org cannot be deleted as it has more than 1 user.
+
+        + Org cannot be deleted as it has more than 1 managed by relationship.
+
+        + Org cannot be deleted as it has managed orgs.
+
+        <div>
+        <Callout type='info'>When deleting a Webex for BroadWorks Organization with BroadWorks Directory Synchronization enabled, a prerequisite is to disable BroadWorks Directory Synchronization for the given Organization. Refer to the [Organization Deletion](https://developer.webex.com/docs/api/guides/webex-for-broadworks-developers-guide#organization-deletion) section of the [Webex for BroadWorks](/docs/api/guides/webex-for-broadworks-developers-guide) guide for more information.</Callout>
+        </div>
+      operationId: Delete Organization
+      parameters:
+      - description: The unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        explode: false
+        in: path
+        name: orgId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+        example: Bearer YOUR_AUTHORIZATION_TOKEN
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          content: {}
+          description: No Content
+      summary: Delete Organization
+      tags: []
+      x-accepts:
+      - application/json
+    get:
+      description: |-
+        Shows details for an organization, by ID.
+
+        Specify the org ID in the `orgId` parameter in the URI.
+      operationId: Get Organization Details
+      parameters:
+      - description: The unique identifier for the organization.
+        example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+        explode: false
+        in: path
+        name: orgId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: e.g. Bearer YOUR_AUTHORIZATION_TOKEN
+        example: Bearer YOUR_AUTHORIZATION_TOKEN
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+                displayName: "Acme, Inc."
+                created: 2015-10-18T14:26:16+00:00
+              schema:
+                $ref: '#/components/schemas/Get_Organization_Details_200_response'
+          description: OK
+      summary: Get Organization Details
+      tags: []
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    GetOrgResponse:
+      properties:
+        schemas:
+          description: Output JSON schemas.
+          items: {}
+          type: array
+        id:
+          description: Webex Identity assigned organization identifier.
+          example: 82adacf4-453f-4e2b-a406-2939fddcaad2
+          type: string
+        displayName:
+          description: Full name of the organization.
+          example: "Acme, Inc."
+          type: string
+        meta:
+          $ref: '#/components/schemas/metaObject'
+      required:
+      - displayName
+      - id
+      - schemas
+      type: object
+    metaObject:
+      properties:
+        created:
+          description: The date and time the organization was created.
+          example: '"2021-05-13T15:51:09.736Z"'
+          type: string
+        lastModified:
+          description: The last modification time of the organization.
+          example: 2024-05-16T12:25:16.739Z
+          type: string
+        version:
+          description: The version information of the organization.
+          example: W/\"67863103533\"
+          type: string
+      required:
+      - created
+      - lastModified
+      - version
+      type: object
+    updateOrgObject:
+      properties:
+        schemas:
+          description: Input JSON schemas.
+          items: {}
+          type: array
+        displayName:
+          description: New full name of the organization.
+          example: "Acme_New, Inc."
+          type: string
+      required:
+      - displayName
+      - schemas
+      type: object
+    Organization:
+      properties:
+        id:
+          description: A unique identifier for the organization.
+          example: Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85NmFiYzJhYS0zZGNjLTExZTUtYTE1Mi1mZTM0ODE5Y2RjOWE
+          type: string
+        displayName:
+          description: Full name of the organization.
+          example: "Acme, Inc."
+          type: string
+        created:
+          description: The date and time the organization was created.
+          example: 2015-10-18T14:26:16+00:00
+          type: string
+      type: object
+    Organization Collection Response:
+      properties:
+        items:
+          items: {}
+          type: array
+      type: object
+    Get_an_organization_200_response_meta:
+      description: Meta data information of organization.
+      example:
+        created: created
+        lastModified: lastModified
+        version: version
+      properties:
+        created:
+          description: The date and time the organization was created.
+          type: string
+        lastModified:
+          description: The last modification time of the organization.
+          type: string
+        version:
+          description: The version information of the organization.
+          type: string
+      required:
+      - created
+      - lastModified
+      - version
+      type: object
+    Get_an_organization_200_response:
+      example:
+        displayName: displayName
+        meta:
+          created: created
+          lastModified: lastModified
+          version: version
+        schemas:
+        - ""
+        - ""
+        id: id
+      properties:
+        schemas:
+          description: Output JSON schemas.
+          items: {}
+          type: array
+        id:
+          description: Webex Identity assigned organization identifier.
+          type: string
+        displayName:
+          description: Full name of the organization.
+          type: string
+        meta:
+          $ref: '#/components/schemas/Get_an_organization_200_response_meta'
+      required:
+      - displayName
+      - id
+      - schemas
+      type: object
+    Update_an_organization_request:
+      properties:
+        schemas:
+          description: Input JSON schemas.
+          items: {}
+          type: array
+        displayName:
+          description: New full name of the organization.
+          type: string
+      required:
+      - displayName
+      - schemas
+      type: object
+    List_Organizations_200_response:
+      example:
+        items:
+        - ""
+        - ""
+      properties:
+        items:
+          items: {}
+          type: array
+      type: object
+    Get_Organization_Details_200_response:
+      example:
+        displayName: displayName
+        created: created
+        id: id
+      properties:
+        id:
+          description: A unique identifier for the organization.
+          type: string
+        displayName:
+          description: Full name of the organization.
+          type: string
+        created:
+          description: The date and time the organization was created.
+          type: string
+      type: object
+
