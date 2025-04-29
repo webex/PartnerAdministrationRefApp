@@ -20,11 +20,11 @@ The application is intended to:
     *   Authenticate users interactively to obtain access tokens for API calls.
     *   Handle token refresh and error scenarios.
 
-    **Wholesale customer and subscriber provisioning:**
+*   **Wholesale customer and subscriber provisioning:**
     *   Provision wholesale customers and subscribers.
     *   Manage subscriber details, including phone numbers and devices.
 
-    **Webex Calling configuration:**
+*   **Webex Calling configuration:**
     *   Set up PSTN connections for calling locations.
     *   Assign phone numbers to locations and subscribers.
     *   Configure subscriber devices.
@@ -80,8 +80,8 @@ The application is built using a modular architecture to ensure separation of co
     *   OrganizationManager: Handles organization-related operations.
 *   **Input Providers:** These classes handle user input, and provide the necessary data to the managers. For example:
     *   WholesaleCustomerInputProvider: Collects input for Wholesale customer operations.
-*   **Mappers:** These classes are responsible for mapping API responses to internal models and vice versa. For example:
-    *   PersonMapper: Maps user-related API responses to internal PersonDetails models.
+*   **Mappers:** These classes are responsible for converting internal data models into API request objects for outgoing API calls. For example:
+    *   WholesaleCustomerMapper: Maps the `WholesaleCustomerDetails` internal data model to a `ProvisionAWholesaleCustomerRequest` object for API communication.
 *   **Utility Classes:** These include helper classes for common tasks, such as:
     *   PagingUtil: Handles pagination for API responses.
     *   ErrorResponseParser: Extracts error details from API responses.
@@ -95,10 +95,10 @@ The project is organized into the following modules and packages:
 
 *   `manager`: Contains manager classes that encapsulate business logic for interacting with APIs.
 *   `input`: Includes input provider classes for collecting user input.
-*   `mapper`: Contains mappers for converting API responses to internal models.
+*   `mapper`: Contains mappers for converting internal data models into API request objects.
 *   `model`: Defines data models used throughout the application.
 *   `auth`: Provides functionality for managing access tokens, including obtaining, refreshing, and attaching them to API requests for secure authentication.
-*   `client`: Includes the WebexClient class for making API calls and handling responses.
+*   `client`: Includes the `WebexClient` class for making API calls and handling responses.
 *   `util`: Provides utility classes for common tasks like pagination and error parsing.
 
 ## Installation
@@ -140,13 +140,16 @@ The project is organized into the following modules and packages:
 
 4.  **Add Configuration:**
 
-    Optionally update the `referenceApp/src/main/resources/application.properties` configuration file with various configurations as desired. For example:
+    Optionally update the `referenceApp/src/main/resources/application.properties` configuration file with various configurations as desired, as an alternative to entering it when prompted at application startup. For example:
 
     *   Webex Integration OAuth Client ID
     *   Webex Integration OAuth Secret
     *   Webex Integration Redirect URI
     *   Onboarding Template Provisioning ID
-    *   PSTN Connection Carrier Provider ID
+    *   PSTN Connection Provider ID
+    
+> **Tip**: For the *PSTN Connection Provider ID* configuration property, use the `Try It` section of the [Retrieve PSTN Connection Options for a Location](https://developer.webex.com/docs/api/v1/pstn/retrieve-pstn-connection-options-for-a-location) API reference on the [Webex for Developers](https://developer.webex.com/) portal to select the ID of the desired PSTN connection provider.
+
 
 ## How to Use
 
@@ -160,7 +163,7 @@ The project is organized into the following modules and packages:
     gradlew bootRun
     ```
 
-    MacOS, Linus:
+    MacOS, Linux:
 
     ```bash
     ./gradlew bootRun
@@ -168,8 +171,8 @@ The project is organized into the following modules and packages:
 
 2.  **Navigate Menus:**
 
-    *   Use the Individual API Menus for specific API operations.
-    *   Use the Onboarding Journey Menus for guided workflows like renaming an organization or provisioning Wholesale customers.
+    *   Use the **Journey Menu** for guided workflows like provisioning a Wholesale customer or renaming an organization.
+    *   Use the **API Menu** for specific API operations.
 
 3.  **Perform Operations:**
 
@@ -181,4 +184,6 @@ The project is organized into the following modules and packages:
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details. This application is for reference purposes only. Cisco Systems takes no responsibility for any issues arising from reuse of the source code within this application. Cisco Systems.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+This application is for reference purposes only. Cisco Systems takes no responsibility for any issues arising from reuse of the source code contained within this application.
