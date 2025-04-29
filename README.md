@@ -108,6 +108,48 @@ The project is organized into the following modules and packages:
     *   Gradle 7.0 or higher.
     *   Webex Partner administration account in Partner organization.
     *   Webex Integration created.
+    
+		> **Note**: When creating the *Webex Integration*, it is recommended to do the following:
+		> 
+		> Set the Redirect URI(s) to a local callback URL
+		> e.g.
+		>
+		> - `http://localhost:4200/authorize`
+		> 
+		> (Also see related item `Step 4. Add Configuration`) 
+		> 
+		> Enable the following scopes:
+		> 
+		> - spark-admin:wholesale\_customers\_write, spark-admin:wholesale\_customers\_read
+		> 
+		> - spark-admin:wholesale\_subscribers\_write, spark-admin:wholesale\_subscribers\_read
+		> 
+		> - spark-admin:telephony\_config\_write, spark-admin:telephony\_config\_read
+		> 
+		> - spark-admin:telephony\_pstn\_write, spark-admin:telephony\_pstn\_read
+		> 
+		> - spark-admin:locations\_write, spark-admin:locations\_read
+		> 
+		> - spark-admin:devices\_write, spark-admin:devices\_read
+		> 
+		> - spark-admin:organizations\_write, spark-admin:organizations\_read
+		> 
+		> - identity:people\_rw, identity:people\_read
+		> 
+		> - identity:organizations\_rw, identity:organizations\_read
+		> 
+		> - spark:all
+		> 
+		> - spark:calls\_write, spark:calls\_read
+		> 
+		> - spark:people\_write
+		> 
+		> - spark:devices\_write, spark:devices\_read
+		> 
+		> - spark:telephony\_config\_write, spark:telephony\_config\_read
+		> 
+		> - spark:organizations\_read
+
 
 2.  **Obtain the source code**
 
